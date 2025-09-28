@@ -1,57 +1,33 @@
 import { Ionicons } from '@expo/vector-icons';
-import { FlatList, SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 
-const tickets = [
-  { id: '1', title: 'Comedy Night', date: 'Oct 12 · 7:00 PM', venue: 'Crossroads Theater', code: 'CNY-4821' },
-  { id: '2', title: 'Coffee & Create', date: 'Oct 17 · 6:30 PM', venue: 'Third Space Cafe', code: 'CAF-9173' },
-  { id: '3', title: 'Board Game Mixer', date: 'Oct 21 · 5:00 PM', venue: 'Rivermarket Hub', code: 'BGM-2224' },
-];
+const PastCard = ({ day, time }:{day:string; time:string}) => (
+  <View style={{
+    backgroundColor:'#fff', padding:16, borderRadius:24, flexDirection:'row',
+    alignItems:'center', justifyContent:'space-between',
+    shadowColor:'#000', shadowOpacity:0.06, shadowRadius:10, elevation:2
+  }}>
+    <View style={{flexDirection:'row', alignItems:'center', gap:14}}>
+      <View style={{backgroundColor:'#EFE9DF', padding:12, borderRadius:16}}>
+        <Ionicons name="restaurant" size={22} color="#BEB7AE" />
+      </View>
+      <View>
+        <Text style={{fontSize:18, fontWeight:'700'}}>{day}</Text>
+        <Text style={{color:'#8D8D8D', marginTop:4}}>{time}</Text>
+      </View>
+    </View>
+    <Ionicons name="chevron-forward" size={20} color="#9A958D" />
+  </View>
+);
 
-export default function TicketsScreen() {
+export default function Events() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#F6F1E9', padding: 20 }}>
-      <Text style={{ fontSize: 28, fontWeight: '700', marginBottom: 12 }}>Your Tickets</Text>
-      <FlatList
-        data={tickets}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{ paddingBottom: 32 }}
-        renderItem={({ item }) => (
-          <View
-            style={{
-              backgroundColor: '#fff',
-              borderRadius: 24,
-              padding: 20,
-              marginBottom: 16,
-              shadowColor: '#000',
-              shadowOpacity: 0.06,
-              shadowRadius: 10,
-              elevation: 2,
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 16,
-            }}
-          >
-            <View style={{ backgroundColor: '#FFF4E5', borderRadius: 16, padding: 14 }}>
-              <Ionicons name="ticket-outline" size={22} color="#FF7A1A" />
-            </View>
-            <View style={{ flex: 1 }}>
-              <Text style={{ fontSize: 18, fontWeight: '700' }}>{item.title}</Text>
-              <Text style={{ color: '#8D8D8D', marginTop: 4 }}>{item.date}</Text>
-              <Text style={{ color: '#8D8D8D' }}>{item.venue}</Text>
-            </View>
-            <View
-              style={{
-                backgroundColor: '#F6F1E9',
-                borderRadius: 12,
-                paddingHorizontal: 12,
-                paddingVertical: 6,
-              }}
-            >
-              <Text style={{ fontWeight: '600', fontSize: 12, letterSpacing: 1 }}>{item.code}</Text>
-            </View>
-          </View>
-        )}
-      />
+    <SafeAreaView style={{flex:1, backgroundColor:'#F6F1E9'}}>
+      <View style={{padding:20, gap:16}}>
+        <Text style={{fontSize:44, fontWeight:'700'}}>Events</Text>
+        <Text style={{color:'#7C776F', fontWeight:'700'}}>Past</Text>
+        <PastCard day="Wednesday, September 24" time="7:00 PM" />
+      </View>
     </SafeAreaView>
   );
 }
